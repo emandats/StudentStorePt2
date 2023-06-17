@@ -27,7 +27,7 @@ export default function ProductCard({
         <img src={products.image} alt={products.name} />
         </Link>
         <p>{products.name}</p>
-        <p>{products.price}</p>
+        <p>${products.price}</p>
         {showDescription && <p>{products.description}</p>}
         <button onClick={() => handleAddItemToCart(products)}>
           Add to Cart
