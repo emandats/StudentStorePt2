@@ -1,0 +1,25 @@
+.logo {
+  width: 100%;
+  float: right;
+  padding-right: 16px;
+  display: flex;
+  flex-direction: row;
+  margin-left: 50%;
+  gap: 20px;
+}
+
+.logo img {
+  width: 60px;
+  height: auto;
+}
+
+.logo img {
+  float: right;
+  padding-left: 16px;
+  width: 60px;
+  height: auto;
+}
+
+.link {
+  color: whitesmoke;
+}
