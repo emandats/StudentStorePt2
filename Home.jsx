@@ -2,10 +2,11 @@ import React, { useState, useEffect } from "react";
 import "./Home.css";
 import Hero from "../Hero/Hero";
 import ProductGrid from "../ProductGrid/ProductGrid";
-import Searchbar from "../SearchBar/SearchBar";
+import Searchbar from "../Searchbar/Searchbar";
 import Footer from "../Footer/Footer";
 
-export default function Home() {
+export default function Home({handleAddItemToCart,
+  handleRemoveItemFromCart}) {
   const [products, setProducts] = useState([]);
   const [filteredProducts, setFilteredProducts] = useState([]);
 
@@ -58,7 +59,9 @@ export default function Home() {
         <button value="Tech" onClick={handleClick}> Tech </button>
       </div>
       <h2 id = "BuyNow">Best Selling Products</h2>
-      <ProductGrid products={filteredProducts} />
+      <ProductGrid products={filteredProducts} 
+      handleAddItemToCart={handleAddItemToCart}
+      handleRemoveItemFromCart={handleRemoveItemFromCart}/>
       <div className = "about" id = "About">
         <div className = "content">
           <h3 id = "AboutUs">About</h3>

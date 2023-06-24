@@ -6,7 +6,7 @@ const ProductView = ({
   productId,
   quantity,
   handleAddItemToCart,
-  handleRemoveItemToCart
+  handleRemoveItemFromCart
 }) => {
   return (
     <div className="product-view">
@@ -16,8 +16,8 @@ const ProductView = ({
         productId={productId}
         quantity={quantity}
         handleAddItemToCart={handleAddItemToCart}
-        handleRemoveItemToCart={handleRemoveItemToCart}
-        showDescription={true}s
+        handleRemoveItemFromCart={handleRemoveItemFromCart}
+        showDescription={true}
       />
     </div>
   );

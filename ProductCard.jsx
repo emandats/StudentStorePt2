@@ -1,40 +1,47 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import "./ProductCard.css"
+import "./ProductCard.css";
 
 export default function ProductCard({
   products,
-  handleAddItemToCart,
-  handleRemoveItemToCart,
   productId,
   quantity,
+  handleAddItemToCart,
+  handleRemoveItemFromCart,
   showDescription,
 }) {
-  const {id, name, price, description, image } = products;
+  const {id, name, price, description, image, count } = products;
 
   const handleAddToCart = () => {
-    handleAddItemToCart(id);
+    handleAddItemToCart(products);
   };
 
   const handleRemoveFromCart = () => {
-    handleRemoveItemFromCart(id);
+    handleRemoveItemFromCart(products);
   };
 
   return (
     <div className="product-card">
       <div className="media">
-        <Link to={`/products/${products.id}`}>
-        <img src={products.image} alt={products.name} />
+        <Link to={`/products/${productId}`}>
+          <img src={image} alt={name} />
         </Link>
-        <p>{products.name}</p>
-        <p>${products.price}</p>
-        {showDescription && <p>{products.description}</p>}
-        <button onClick={() => handleAddItemToCart(products)}>
-          Add to Cart
+      </div>
+      <p className="product-name">{name}</p>
+      <p className="product-price">${price.toFixed(2)}</p>
+      {showDescription && <p className="product-description">{description}</p>}
+      <div className="quantity-container">
+        <button className="add" onClick={handleAddToCart}>
+          +
         </button>
-        <button onClick={() => handleRemoveItemFromCart(products)}>
-          Remove from Cart
+        <button
+          className="remove"
+          onClick={handleRemoveFromCart}
+          disabled={count === 0}
+        >
+          -
         </button>
+        {count > 0 && <p className="product-quantity">Quantity: {count}</p>}
       </div>
     </div>
   );

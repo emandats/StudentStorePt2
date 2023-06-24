@@ -1,17 +1,27 @@
-import React, {useState } from "react";
-import { useParams } from "react-router-dom";
+import React from "react";
+import "./ProductGrid.css";
 import ProductCard from "../ProductCard/ProductCard";
-import "./ProductGrid.css"
 
-export default function ProductGrid ({products, handleAddItemToCart, handleRemoveItemFromCart}) {
+const ProductGrid = ({
+  products,
+  handleAddItemToCart,
+  handleRemoveItemFromCart,
 
+}) => {
   return (
     <div className="product-grid">
-        {products && products.map((products) => (
-            <ProductCard products={products}
-           key={products.id}
-           /> 
-        ))}
-    </div>
+    {products.map((product) => (
+      <ProductCard
+        key={product.id}
+        products={product}
+        handleAddItemToCart={handleAddItemToCart} // Pass the function as a prop
+        handleRemoveItemFromCart={handleRemoveItemFromCart}
+        productId = {product.id}
+      />
+    ))}
+  </div>
+  
   );
-}
+};
+
+export default ProductGrid;

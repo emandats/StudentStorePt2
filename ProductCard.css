@@ -17,3 +17,23 @@
   height: 250px;
   width: 248px
 }
+
+.product-card .quantity-container .quantity {
+  width: 80px;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  padding: 5px;
+}
+.product-card .quantity-container .quantity .amt {
+  background: var(--accent-orange);
+  color: white;
+  width: 20px;
+  height: 20px;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+
