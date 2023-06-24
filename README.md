@@ -44,3 +44,10 @@ Check out our [deployed Student Store](https://codepath-student-store-demo.surge
 - [ ] Build a page in the UI that displays the list of all past orders. The user should be able to click on any individual order to take them to a more detailed page of the transaction.
 - [ ] Allow users to use an input to filter orders by the email of the person who placed the order.
 - [ ] Your choice! (Replace this bullet explaining what you implemented. Example: Users can create a wish list of products they are interested in but not yet ready to purchase.)
+
+### Walkthrough Video
+
+<a href="https://www.loom.com/share/6144f6d689ad4cdfa81406ba19fa1f60">
+   <p>Student Store Pt 2</p>
+   <img style="max-width:300px;" src="https://cdn.loom.com/sessions/thumbnails/6144f6d689ad4cdfa81406ba19fa1f60-with-play.gif">
+</a>
