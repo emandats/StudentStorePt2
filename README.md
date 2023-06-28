@@ -47,7 +47,7 @@ Check out our [deployed Student Store](https://codepath-student-store-demo.surge
 
 ### Walkthrough Video
 
-<a href="https://www.loom.com/share/6144f6d689ad4cdfa81406ba19fa1f60">
+<a href="https://www.loom.com/share/d50dd027bb9f436d976696a722cfad84">
    <p>Student Store Pt 2</p>
-   <img style="max-width:300px;" src="https://cdn.loom.com/sessions/thumbnails/6144f6d689ad4cdfa81406ba19fa1f60-with-play.gif">
+   <img style="max-width:300px;" src="https://cdn.loom.com/sessions/thumbnails/d50dd027bb9f436d976696a722cfad84-with-play.gif">
 </a>
