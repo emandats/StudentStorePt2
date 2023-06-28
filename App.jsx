@@ -1,52 +1,104 @@
 import * as React from "react";
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import { BrowserRouter as Router,
+  Route,
+  Routes,
+  BrowserRouter,
+} from "react-router-dom";
+import axios from "axios";
 import { useState, useEffect } from "react";
 import Navbar from "../Navbar/Navbar";
 import Home from "../Home/Home";
-import Sidebar from "../Sidebar/Sidebar";
 import "./App.css";
-import axios from "axios";
 import ProductDetail from "../ProductDetail/ProductDetail";
+import Sidebar from "../Sidebar/Sidebar";
+import CheckoutForm from "../CheckoutForm/CheckoutForm";
 
 export default function App() {
   const [products, setProducts] = useState([]); // all products
   const [isFetching, setIsFetching] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
   const [cart, setCart] = useState([]);
-  // const [cartItem, setCartItem] = useState([]);
+  const [checkoutForm, setCheckoutForm] = useState({
+    name: "",
+    email: "",
+  });
+  const [receipt, setReceipt] = useState("");
 
-  const handleAddItemToCart = (item)=>{
-    if(cart.includes(item)){
-        console.log(item.count)
-        item.count++
-      }else{
-        item.count = 1
-        cart.push(item)
+  const handleOnCheckoutFormChange = (e) => {
+    if (e.target) {
+      const { name, value } = e.target;
+      setCheckoutForm((prevForm) => ({
+        ...prevForm,
+        [name]: value,
+      }));
+    }
+  };
+
+  const handleOnSubmitCheckoutForm = async (event) => {
+    let subtotal = 0;
+    let cartItem = "";
+    let taxes = 0;
+    let total = 0;
+
+    cart.forEach((item) => {
+      const product = products.find((product) => product.id === item.id);
+      if (product) {
+        subtotal += product.price * item.count;
+        taxes = subtotal * 0.0875
+        total = subtotal + taxes
+        cartItem += `${item.count}x ${product.name}\n`;
       }
-      setCart(cart)
-      console.log("Cart")
-      console.log(cart)
-  }
+    });
+
+    let receiptMesssage = `Showing receipt for ${checkoutForm.name} available at ${checkoutForm.email}:\n\n${cartItem}\n`;
+    receiptMesssage += `Before taxes, subtotal was ${subtotal.toFixed(2)}`;
+    receiptMesssage += `After taxes and fees were applied, the total comes out to ${total.toFixed(2)}`;
+    console.log(receiptMesssage);
+    setReceipt(receiptMesssage);
+    setCart([]);
+  };
+  
+
+  const handleAddItemToCart = (item) => {
+    setCart((prevCart) => {
+      const updatedCart = [...prevCart];
+      const existingItemIndex = updatedCart.findIndex((cartItem) => cartItem.id === item.id);
+  
+      if (existingItemIndex !== -1) {
+        const updatedItem = { ...updatedCart[existingItemIndex] };
+        updatedItem.count++;
+        updatedCart[existingItemIndex] = updatedItem;
+      } else {
+        item.count = 1;
+        updatedCart.push(item);
+      }
+  
+      return updatedCart;
+    });
+  };
+  
    
-  const handleRemoveItemFromCart = (item)=>{
-    if(cart.includes(item)){
-        console.log(item.count)
-        item.count--
-        if(item.count <= 0){
-          const index = cart.indexOf(item)
-          var noItem = cart.splice(index, 1)
-          setCart(noItem)
-          console.log(cart)
+  const handleRemoveItemFromCart = (item) => {
+    setCart((prevCart) => {
+      const updatedCart = [...prevCart];
+      const existingItemIndex = updatedCart.findIndex((cartItem) => cartItem.id === item.id);
+  
+      if (existingItemIndex !== -1) {
+        const updatedItem = { ...updatedCart[existingItemIndex] };
+        updatedItem.count--;
+  
+        if (updatedItem.count <= 0) {
+          updatedCart.splice(existingItemIndex, 1);
+        } else {
+          updatedCart[existingItemIndex] = updatedItem;
         }
       }
-    else{
-      item.count = 1
-      cart.push(item)
-    }
-    setCart(cart)
-    console.log("Cart")
-    console.log(cart)
-  }
+  
+      return updatedCart;
+    });
+  };
+  
+  
 
   useEffect(() => {
     const fetchProducts = async () => {
@@ -74,18 +126,20 @@ export default function App() {
     fetchProducts();
   }, []);
 
-  // console.log("**cart")
-  // console.log(cart)
   return (
     <div className="app">
       <Router>
         <main>
         <div>
             <Sidebar
+            handleOnSubmitCheckoutForm = {handleOnSubmitCheckoutForm}
+            handleOnCheckoutFormChange = {handleOnCheckoutFormChange}
               isOpen={isOpen}
               setIsOpen={setIsOpen}
               products={products}
               shoppingCart={cart}
+              receipt = {receipt}
+   
             />
           </div>
           <Navbar />
